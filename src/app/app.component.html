@@ -1,0 +1,34 @@
+<div style="text-align:left">
+  <h1>Welcome to {{ title }}!!</h1>
+  <form [formGroup]="myForm" novalidate>
+    <div class="form-group">
+      <label class="center-block"
+        >Username:
+        <input
+          class="form-control"
+          formControlName="username"
+          (keyup)="onKeyUp()"
+          (keydown)="onKeyDown()"
+        />
+      </label>
+    </div>
+    <div
+      *ngIf="
+        myForm.controls['username'].invalid ||
+        (myForm.controls['username'].touched &&
+          myForm.controls['username'].dirty)
+      "
+      class="alert"
+    >
+      <div *ngIf="myForm.controls['username'].errors?.required">
+        Please enter username
+      </div>
+      <div *ngIf="myForm.controls['username'].errors?.invalidUrl">
+        Template is not valid
+      </div>
+    </div>
+  </form>
+  <p>myForm value: {{ myForm.value | json }}</p>
+  <p>myForm value: {{ myForm.controls['username'].errors | json }}</p>
+  <p>myForm status: {{ myForm.status | json }}</p>
+</div>
